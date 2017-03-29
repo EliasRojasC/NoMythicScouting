@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static android.R.attr.value;
+import static java.util.logging.Logger.global;
 
 public class FormActivity extends AppCompatActivity {
     public int teamNum;
@@ -77,6 +81,130 @@ public class FormActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void setAutolowShot(View view){
+        int value2;
+
+        int lowShotValue = Integer.parseInt(autolowShot.getText().toString());
+        int id = view.getId();
+
+        if (id == findViewById(R.id.button4).getId()) value2 = 1;
+        else value2 = -1;
+
+        if (lowShotValue == 0){
+            if(value2 == 1){
+                autolowShot.setText(""+(lowShotValue + 1));
+            }
+
+        } else {
+            if (value2 == 1){
+                autolowShot.setText("" + (lowShotValue + 1));
+            } else {
+                autolowShot.setText("" + (lowShotValue - 1));
+            }
+
+        }
+    }
+
+    public void setTeleopHighShot(View view){
+        int value3;
+
+        int teleopHighShotValue = Integer.parseInt(teleopHighShot.getText().toString());
+        int id = view.getId();
+
+        if(id == findViewById(R.id.button7SubtractHigh).getId()) value3 = 1;
+        else value3 = -1;
+
+        if (teleopHighShotValue == 0){
+            if(value3 == 1){
+                teleopHighShot.setText(""+(teleopHighShotValue + 1));
+            }
+        } else {
+            if (value3 == 1){
+                teleopHighShot.setText("" + (teleopHighShotValue + 1));
+            } else {
+                teleopHighShot.setText("" + (teleopHighShotValue - 1));
+            }
+        }
+    }
+
+    public void setTeleopLowShot(View view){
+        int value4;
+
+        int teleopLowShotValue = Integer.parseInt(teleopLowShot.getText().toString());
+        int id = view.getId();
+
+        if(id == findViewById(R.id.button5SubtractLow).getId()) value4 = 1;
+        else value4 = -1;
+
+        if (teleopLowShotValue == 0){
+            if(value4 == 1){
+                teleopLowShot.setText(""+(teleopLowShotValue + 1));
+            }
+        } else {
+            if (value4 == 1){
+                teleopLowShot.setText("" + (teleopLowShotValue + 1));
+            } else {
+                teleopLowShot.setText("" + (teleopLowShotValue - 1));
+            }
+        }
+    }
+
+    public void setTeleopGears(View view){
+        int value4;
+
+        int teleopGearsValue = Integer.parseInt(teleopGears.getText().toString());
+        int id = view.getId();
+
+        if(id == findViewById(R.id.button10AddGear).getId()) value4 = 1;
+        else value4 = -1;
+
+        if (teleopGearsValue == 0){
+            if(value4 == 1){
+                teleopGears.setText(""+(teleopGearsValue + 1));
+            }
+        } else {
+            if (value4 == 1){
+                teleopGears.setText("" + (teleopGearsValue + 1));
+            } else {
+                teleopGears.setText("" + (teleopGearsValue - 1));
+            }
+        }
+    }
+    public void setTimerCount(View view){
+        int value5;
+        double timerCountSeconds = 0;
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                timerCountSeconds += 0.1;
+                timerCount.setText("" + (timerCountSeconds));
+
+            }
+        };
+
+
+        double timerPrint = Double.parseDouble(timerCount.getText().toString());
+        int id = view.getId();
+
+        if(id == findViewById(R.id.button6Start).getId()) value5 = 1;
+        else if (id == findViewById(R.id.button5Stop).getId()) value5 = 2;
+        else value5 = -1;
+
+        if(value5 == 1){
+            timer.scheduleAtFixedRate(task,0,100);
+        }
+        else if(value5 == 2){
+            timer.cancel();
+        }
+        else{
+            timer.cancel();
+            timerCount.setText(""+(0));
+        }
+
     }
 }
 
