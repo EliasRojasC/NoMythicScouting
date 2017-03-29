@@ -16,6 +16,26 @@ import static java.util.logging.Logger.global;
 public class FormActivity extends AppCompatActivity {
     public int teamNum;
 
+    boolean shouldRun;
+
+    float timerCountSeconds = 1;
+
+    Timer timer = new Timer();
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            timerCountSeconds += 0.1;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    timerCount.setText("" + (timerCountSeconds));
+                }
+            });
+
+
+        }
+    };
+
     // references to views
     public TextView autoHighShot;
     public TextView autolowShot;
@@ -174,36 +194,28 @@ public class FormActivity extends AppCompatActivity {
     }
     public void setTimerCount(View view){
         int value5;
-        double timerCountSeconds = 0;
 
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                timerCountSeconds += 0.1;
-                timerCount.setText("" + (timerCountSeconds));
-
-            }
-        };
-
-
-        double timerPrint = Double.parseDouble(timerCount.getText().toString());
+        double timerPrint = Float.parseFloat(timerCount.getText().toString());
         int id = view.getId();
 
         if(id == findViewById(R.id.button6Start).getId()) value5 = 1;
         else if (id == findViewById(R.id.button5Stop).getId()) value5 = 2;
         else value5 = -1;
 
-        if(value5 == 1){
+        if (value5 == 1){
             timer.scheduleAtFixedRate(task,0,100);
         }
-        else if(value5 == 2){
+        else if (value5 == 2){
             timer.cancel();
+
         }
         else{
             timer.cancel();
-            timerCount.setText(""+(0));
+            timer.purge();
+            timerCount.setText("" + 0);
         }
+
+
 
     }
 }
