@@ -1,12 +1,19 @@
 package com.example.elias.nomythicscouting;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,7 +34,7 @@ public class FormActivity extends AppCompatActivity {
 
     Timer timer = new Timer();
     TimerTask task;
-    
+
     // references to views
     public TextView autoHighShot;
     public TextView autolowShot;
@@ -227,5 +234,27 @@ public class FormActivity extends AppCompatActivity {
 
 
     }
+    public void startTheThing (View view2){
+        ConfirmDialogFragment myman = new ConfirmDialogFragment();
+        myman.show(getSupportFragmentManager(), "myMan" );
+    }
+
+    public void saveToCSV () {
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOWNLOADS), "test");
+
+        FileOutputStream outputStream;
+        try {
+            outputStream = new FileOutputStream(file);
+            outputStream.write("heu".getBytes());
+        } catch (Exception e)
+        {
+            //todo fix
+        }
+    }
 }
+
+
+
+
 
