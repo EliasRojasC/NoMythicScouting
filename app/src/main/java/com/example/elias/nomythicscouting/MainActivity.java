@@ -1,5 +1,6 @@
 package com.example.elias.nomythicscouting;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,10 +28,19 @@ public class MainActivity extends AppCompatActivity {
     }
     public void launchForm(){
         final EditText editText = (EditText) findViewById(R.id.editTextTeamNumber);
-        int teamNumber = Integer.parseInt(editText.getText().toString());
-        Intent intent = new Intent(this, FormActivity.class);
-        intent.putExtra("TEAM_NUMBER",teamNumber);
-        startActivity(intent);
+        if  (editText.getText().toString().isEmpty()){
+            Context context = getApplicationContext();
+            CharSequence errorMassage = "you have goofed. Please enter a team number";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, errorMassage, duration);
+            toast.show();
+        } else {
+            int teamNumber = Integer.parseInt(editText.getText().toString());
+            Intent intent = new Intent(this, FormActivity.class);
+            intent.putExtra("TEAM_NUMBER",teamNumber);
+            startActivity(intent);
+        }
     }
 }
 

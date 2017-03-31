@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,24 +19,15 @@ public class FormActivity extends AppCompatActivity {
 
     boolean shouldRun;
 
-    float timerCountSeconds = 1;
+
+
+    float timerCountSeconds = 0;
+
+
 
     Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            timerCountSeconds += 0.1;
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    timerCount.setText("" + (timerCountSeconds));
-                }
-            });
-
-
-        }
-    };
-
+    TimerTask task;
+    
     // references to views
     public TextView autoHighShot;
     public TextView autolowShot;
@@ -203,7 +195,23 @@ public class FormActivity extends AppCompatActivity {
         else value5 = -1;
 
         if (value5 == 1){
-            timer.scheduleAtFixedRate(task,0,100);
+            timer.cancel();
+            timer = new Timer();
+            task = new TimerTask() {
+                @Override
+                public void run() {
+                    timerCountSeconds += 0.1;
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String S = "" + (timerCountSeconds);
+                            timerCount.setText(String.format("%.1f", timerCountSeconds ));
+                        }
+                    });
+
+                }
+            };
+            timer.schedule(task,0,100);
         }
         else if (value5 == 2){
             timer.cancel();
@@ -213,6 +221,7 @@ public class FormActivity extends AppCompatActivity {
             timer.cancel();
             timer.purge();
             timerCount.setText("" + 0);
+            timerCountSeconds = 0;
         }
 
 
