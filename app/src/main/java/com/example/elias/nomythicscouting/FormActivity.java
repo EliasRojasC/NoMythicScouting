@@ -287,9 +287,6 @@ public class FormActivity extends AppCompatActivity {
 
             outputStream.close();
 
-
-
-
             autoHighShot.setText(""+0);
             autolowShot.setText(""+0);
             teleopHighShot.setText(""+0);
@@ -297,14 +294,8 @@ public class FormActivity extends AppCompatActivity {
             teleopGears.setText(""+0);
             value5 = -1;
 
-
-
-
-
-
-            Intent backto = new Intent(this, FormActivity.class);
-            startActivity(backto);
-
+            Intent intent = new Intent(this, FormActivity.class);
+            startActivity(intent);
 
         } catch (Exception e)
         {
