@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NoMythic Scouting</string>
+    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

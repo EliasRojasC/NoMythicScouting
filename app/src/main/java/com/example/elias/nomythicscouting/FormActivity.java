@@ -11,6 +11,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,8 @@ public class FormActivity extends AppCompatActivity {
 
     boolean shouldRun;
 
+    int value5;
+
 
 
     float timerCountSeconds = 0;
@@ -44,6 +48,9 @@ public class FormActivity extends AppCompatActivity {
     public TextView teleopLowShot;
     public TextView teleopGears;
     public TextView timerCount;
+    public CheckBox gearInAuto;
+    public CheckBox didItClimb;
+    public TextView loadingUpdate;
 
     // references to buttons
     public Button autoHighShotMinus;
@@ -62,6 +69,9 @@ public class FormActivity extends AppCompatActivity {
         teleopLowShot = (TextView) findViewById(R.id.lowCount);
         teleopGears = (TextView) findViewById(R.id.gearCount);
         timerCount = (TextView) findViewById(R.id.textView5Timer);
+        gearInAuto = (CheckBox) findViewById(R.id.checkBox);
+        didItClimb = (CheckBox) findViewById(R.id.checkBox2);
+        loadingUpdate = (TextView) findViewById(R.id.textViewUpdates);
 
         // Get all referenves to buttons
         autoHighShotMinus = (Button) findViewById(R.id.button2);
@@ -194,7 +204,7 @@ public class FormActivity extends AppCompatActivity {
         }
     }
     public void setTimerCount(View view){
-        int value5;
+
 
         double timerPrint = Float.parseFloat(timerCount.getText().toString());
         int id = view.getId();
@@ -242,26 +252,64 @@ public class FormActivity extends AppCompatActivity {
     }
 
     public void saveToCSV () {
+        final EditText editText2 = (EditText) findViewById(R.id.matchNumberEditText);
+        final EditText editText3 = (EditText) findViewById(R.id.editTextTeamNumber);
         File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS), "test.csv");
+                Environment.DIRECTORY_DOWNLOADS),  "test.csv" );
 
         FileOutputStream outputStream;
         try {
-            outputStream = new FileOutputStream(file);
-            outputStream.write("heu".getBytes());
-            outputStream.write(",".getBytes());
-            outputStream.write("hwu".getBytes());
-            outputStream.close();
-            Context context = getApplicationContext();
-            CharSequence errorMassage = "Elias and Nick are not idiots";
-            int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, errorMassage, duration);
-            toast.show();
+
+
+
+            outputStream = new FileOutputStream(file);
+            outputStream.write(autoHighShot.getText().toString().getBytes());
+            outputStream.write(autolowShot.getText().toString().getBytes());
+            outputStream.write(teleopHighShot.getText().toString().getBytes());
+            outputStream.write(teleopLowShot.getText().toString().getBytes());
+            outputStream.write(teleopGears.getText().toString().getBytes());
+            outputStream.write(timerCount.getText().toString().getBytes());
+             if (gearInAuto.isChecked()){
+                 outputStream.write("Gear In Auto: true".getBytes());
+             }
+             else{
+                 outputStream.write("Gear In Auto: false".getBytes());
+             }
+             if (didItClimb.isChecked()){
+                 outputStream.write("Did it climb: true".getBytes());
+             }
+             else{
+                 outputStream.write("Did it climb: false".getBytes());
+             }
+             outputStream.write((("Match Number:" + editText2.getText().toString()).getBytes()));
+             outputStream.write(("Team Number"+editText3.getText().toString()).getBytes());
+
+            outputStream.close();
+
+
+
+
+            autoHighShot.setText(""+0);
+            autolowShot.setText(""+0);
+            teleopHighShot.setText(""+0);
+            teleopLowShot.setText(""+0);
+            teleopGears.setText(""+0);
+            value5 = -1;
+
+
+
+
+
+
+            Intent backto = new Intent(this, FormActivity.class);
+            startActivity(backto);
+
+
         } catch (Exception e)
         {
             Context context = getApplicationContext();
-            CharSequence errorMassage = "We did it my main man";
+            CharSequence errorMassage = "you have goofed. ";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, errorMassage, duration);
