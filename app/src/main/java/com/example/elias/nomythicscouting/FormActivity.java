@@ -243,12 +243,14 @@ public class FormActivity extends AppCompatActivity {
 
     public void saveToCSV () {
         File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS), "test");
+                Environment.DIRECTORY_DOWNLOADS), "test.csv");
 
         FileOutputStream outputStream;
         try {
             outputStream = new FileOutputStream(file);
             outputStream.write("heu".getBytes());
+            outputStream.write(",".getBytes());
+            outputStream.write("hwu".getBytes());
             outputStream.close();
             Context context = getApplicationContext();
             CharSequence errorMassage = "Elias and Nick are not idiots";
