@@ -1,6 +1,7 @@
 package com.example.elias.nomythicscouting;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -247,8 +249,21 @@ public class FormActivity extends AppCompatActivity {
         try {
             outputStream = new FileOutputStream(file);
             outputStream.write("heu".getBytes());
+            outputStream.close();
+            Context context = getApplicationContext();
+            CharSequence errorMassage = "Elias and Nick are not idiots";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, errorMassage, duration);
+            toast.show();
         } catch (Exception e)
         {
+            Context context = getApplicationContext();
+            CharSequence errorMassage = "We did it my main man";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, errorMassage, duration);
+            toast.show();
             //todo fix
         }
     }
