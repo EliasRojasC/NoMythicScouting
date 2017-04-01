@@ -69,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         }
     public void launchForm(){
         final EditText editText = (EditText) findViewById(R.id.editTextTeamNumber);
+        final EditText editText1 = (EditText) findViewById(R.id.matchNumberEditText);
+
+
         if  (editText.getText().toString().isEmpty()){
             Context context = getApplicationContext();
             CharSequence errorMassage = "you have goofed. Please enter a team number";
@@ -78,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         } else {
             int teamNumber = Integer.parseInt(editText.getText().toString());
+            int matchNumber = Integer.parseInt(editText1.getText().toString());
+            editText.setText("");
+            editText1.setText("");
             Intent intent = new Intent(this, FormActivity.class);
             intent.putExtra("TEAM_NUMBER",teamNumber);
+            intent.putExtra("MATCH_NUMBER", matchNumber);
             startActivity(intent);
         }
     }

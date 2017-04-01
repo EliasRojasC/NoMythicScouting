@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,11 +33,13 @@ public class FormActivity extends AppCompatActivity {
 
     int value5;
 
+    EditText juice;
 
+    private static final String TAG = "myman";
 
     float timerCountSeconds = 0;
 
-
+    private int matchNumber;
 
     Timer timer = new Timer();
     TimerTask task;
@@ -63,6 +66,7 @@ public class FormActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         // Get all referenves to views
+        juice = (EditText) findViewById(R.id.comments);
         autoHighShot = (TextView) findViewById(R.id.editText2HighGoal);
         autolowShot = (TextView) findViewById(R.id.editTextLowGoal);
         teleopHighShot = (TextView) findViewById(R.id.highCount);
@@ -85,9 +89,11 @@ public class FormActivity extends AppCompatActivity {
         timerCount.setText("0");
 
 
-        int recived = intent.getIntExtra("TEAM_NUMBER", 0000);
+        teamNum = intent.getIntExtra("TEAM_NUMBER", 0000);
         final TextView teamNumView = (TextView) findViewById(R.id.teamNumberFormPassthruText);
-        teamNumView.setText("" + recived);
+        teamNumView.setText("" + teamNum);
+
+        matchNumber = intent.getIntExtra("MATCH_NUMBER", 0000);
     }
 
     public void setAutoHighShot(View view) {
@@ -252,38 +258,46 @@ public class FormActivity extends AppCompatActivity {
     }
 
     public void saveToCSV () {
-        final EditText editText2 = (EditText) findViewById(R.id.matchNumberEditText);
         final EditText editText3 = (EditText) findViewById(R.id.editTextTeamNumber);
         File file = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DOWNLOADS),  "test.csv" );
+                Environment.DIRECTORY_DOWNLOADS),  matchNumber+"_"+teamNum+".csv" );
 
         FileOutputStream outputStream;
         try {
 
 
-
-
             outputStream = new FileOutputStream(file);
             outputStream.write(autoHighShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
             outputStream.write(autolowShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
             outputStream.write(teleopHighShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
             outputStream.write(teleopLowShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
             outputStream.write(teleopGears.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
             outputStream.write(timerCount.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
              if (gearInAuto.isChecked()){
-                 outputStream.write("Gear In Auto: true".getBytes());
+                 outputStream.write(" true".getBytes());
              }
              else{
-                 outputStream.write("Gear In Auto: false".getBytes());
+                 outputStream.write("false".getBytes());
              }
+            outputStream.write(",".getBytes());
              if (didItClimb.isChecked()){
-                 outputStream.write("Did it climb: true".getBytes());
+                 outputStream.write(" true".getBytes());
              }
              else{
-                 outputStream.write("Did it climb: false".getBytes());
+                 outputStream.write(" false".getBytes());
              }
-             outputStream.write((("Match Number:" + editText2.getText().toString()).getBytes()));
-             outputStream.write(("Team Number"+editText3.getText().toString()).getBytes());
+            outputStream.write(",".getBytes());
+             outputStream.write((("" + matchNumber).getBytes()));
+            outputStream.write(",".getBytes());
+             outputStream.write((""+ teamNum).getBytes());
+            outputStream.write(",".getBytes());
+             outputStream.write(("" + juice.getText().toString()).getBytes());
 
             outputStream.close();
 
@@ -292,21 +306,29 @@ public class FormActivity extends AppCompatActivity {
             teleopHighShot.setText(""+0);
             teleopLowShot.setText(""+0);
             teleopGears.setText(""+0);
-            value5 = -1;
+            juice.setText("");
+                value5 = -1;
+            setTimerCount(findViewById(R.id.buttonReset));
+            gearInAuto.setChecked(false);
+            didItClimb.setChecked(false);
 
-            Intent intent = new Intent(this, FormActivity.class);
+            Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
+
 
         } catch (Exception e)
         {
             Context context = getApplicationContext();
             CharSequence errorMassage = "you have goofed. ";
             int duration = Toast.LENGTH_SHORT;
+            Log.e(TAG,"exeption",e);
 
             Toast toast = Toast.makeText(context, errorMassage, duration);
             toast.show();
             //todo fix
         }
+
+
     }
 }
 

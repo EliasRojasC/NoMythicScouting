@@ -4,12 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
+
+    <TextView
+        android:id="@+id/labelComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comments"
+        android:textSize="18dp"
+        style="@style/AlertDialog.AppCompat"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="224dp"
+        app:layout_constraintHorizontal_bias="0.05" />
+
+    <EditText
+        android:id="@+id/comments"
+        android:layout_width="549dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="94dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:hint="Enter Comments Here"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="79dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:clickable="true"
+        android:onClick="startTheThing"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:drawable/arrow_down_float" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="565dp"
-        android:layout_height="507dp"
+        android:layout_width="563dp"
+        android:layout_height="386dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
@@ -18,7 +64,8 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0">
+        app:layout_constraintHorizontal_bias="1.0"
+        tools:layout_editor_absoluteX="21dp">
 
         <Button
             android:id="@+id/buttonReset"
@@ -33,22 +80,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
-            android:layout_width="79dp"
-            android:layout_height="70dp"
-            android:clickable="true"
-            app:fabSize="mini"
-            android:onClick="startTheThing"
-            app:srcCompat="@android:drawable/arrow_down_float"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="43dp"
-            app:layout_constraintHorizontal_bias="0.498" />
 
         <CheckBox
             android:id="@+id/checkBox2"
@@ -327,8 +358,8 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="562dp"
-        android:layout_height="388dp"
+        android:layout_width="560dp"
+        android:layout_height="328dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
@@ -337,7 +368,8 @@
         android:layout_marginEnd="16dp"
         android:id="@+id/constraintLayout2"
         android:layout_marginRight="16dp"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteX="21dp">
 
         <TextView
             android:id="@+id/teamNumberFormPassthruText"
