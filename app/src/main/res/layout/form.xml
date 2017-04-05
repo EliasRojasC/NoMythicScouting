@@ -8,6 +8,70 @@
     android:focusableInTouchMode="true">
 
     <TextView
+        android:id="@+id/textView8"
+        style="@style/AlertDialog.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="58dp"
+        android:gravity="center"
+        android:text="No Defense"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/sliderLabel"
+        app:layout_constraintTop_toTopOf="@+id/comments" />
+
+    <TextView
+        android:id="@+id/sliderLabel"
+        style="@style/AlertDialog.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Little/Medium Defence"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/comments"
+        app:layout_constraintVertical_bias="0.239" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/AlertDialog.AppCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="58dp"
+        android:gravity="center"
+        android:text="Amazing Defence"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintLeft_toRightOf="@+id/sliderLabel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/comments" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="284dp"
+        android:layout_height="23dp"
+        android:max="2"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/comments"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton2" />
+
+    <TextView
         android:id="@+id/labelComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,27 +83,30 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="224dp"
-        app:layout_constraintHorizontal_bias="0.05" />
+        android:layout_marginBottom="266dp"
+        app:layout_constraintHorizontal_bias="0.062"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <EditText
         android:id="@+id/comments"
-        android:layout_width="549dp"
-        android:layout_height="115dp"
-        android:layout_marginBottom="94dp"
+        android:layout_width="548dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="198dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="Enter Comments Here"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingActionButton2"
-        android:layout_width="79dp"
+        android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
@@ -50,22 +117,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+        app:srcCompat="@android:drawable/arrow_down_float"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="563dp"
-        android:layout_height="386dp"
+        android:layout_width="567dp"
+        android:layout_height="348dp"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="-14dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         android:layout_marginRight="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        tools:layout_editor_absoluteX="21dp">
+        app:layout_constraintHorizontal_bias="1.0">
 
         <Button
             android:id="@+id/buttonReset"
@@ -79,7 +147,9 @@
             app:layout_constraintHorizontal_bias="0.867"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <CheckBox
             android:id="@+id/checkBox2"
@@ -96,7 +166,9 @@
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintHorizontal_bias="0.899"
-            app:layout_constraintVertical_bias="0.755" />
+            app:layout_constraintVertical_bias="0.755"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
 
         <TextView
@@ -114,7 +186,9 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.822" />
+            app:layout_constraintHorizontal_bias="0.822"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/textView5Timer"
@@ -131,7 +205,9 @@
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
-            app:layout_constraintVertical_bias="0.389" />
+            app:layout_constraintVertical_bias="0.389"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/button6Start"
@@ -145,7 +221,9 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHorizontal_bias="0.754" />
+            app:layout_constraintHorizontal_bias="0.754"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/button5Stop"
@@ -159,7 +237,9 @@
             app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.982" />
+            app:layout_constraintHorizontal_bias="0.982"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <Button
             android:id="@+id/button10AddGear"
@@ -358,8 +438,8 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="560dp"
-        android:layout_height="328dp"
+        android:layout_width="568dp"
+        android:layout_height="299dp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
@@ -368,8 +448,7 @@
         android:layout_marginEnd="16dp"
         android:id="@+id/constraintLayout2"
         android:layout_marginRight="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="21dp">
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:id="@+id/teamNumberFormPassthruText"
@@ -384,7 +463,9 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintHorizontal_bias="0.772"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="52dp" />
+            android:layout_marginTop="52dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
 
         <TextView
             android:id="@+id/textView4"

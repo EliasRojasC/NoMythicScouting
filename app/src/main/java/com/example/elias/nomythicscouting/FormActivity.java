@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,8 @@ public class FormActivity extends AppCompatActivity {
     public int teamNum;
 
     boolean shouldRun;
+
+    int sliderProgress;
 
     int value5;
 
@@ -54,6 +57,7 @@ public class FormActivity extends AppCompatActivity {
     public CheckBox gearInAuto;
     public CheckBox didItClimb;
     public TextView loadingUpdate;
+    public SeekBar slidervalue;
 
     // references to buttons
     public Button autoHighShotMinus;
@@ -76,6 +80,7 @@ public class FormActivity extends AppCompatActivity {
         gearInAuto = (CheckBox) findViewById(R.id.checkBox);
         didItClimb = (CheckBox) findViewById(R.id.checkBox2);
         loadingUpdate = (TextView) findViewById(R.id.textViewUpdates);
+        slidervalue = (SeekBar) findViewById(R.id.seekBar);
 
         // Get all referenves to buttons
         autoHighShotMinus = (Button) findViewById(R.id.button2);
@@ -94,6 +99,27 @@ public class FormActivity extends AppCompatActivity {
         teamNumView.setText("" + teamNum);
 
         matchNumber = intent.getIntExtra("MATCH_NUMBER", 0000);
+
+        slidervalue.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                Log.e("SLIDER","Progress: "  + progress);
+                sliderProgress = progress;
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     public void setAutoHighShot(View view) {
@@ -298,6 +324,8 @@ public class FormActivity extends AppCompatActivity {
              outputStream.write((""+ teamNum).getBytes());
             outputStream.write(",".getBytes());
              outputStream.write(("" + juice.getText().toString()).getBytes());
+            outputStream.write(",".getBytes());
+            outputStream.write(("" + sliderProgress).getBytes());
 
             outputStream.close();
 

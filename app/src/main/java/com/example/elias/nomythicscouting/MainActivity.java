@@ -29,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         final FloatingActionButton button = (FloatingActionButton) findViewById(R.id.floatingActionButtonPassThruToForm);
+        final EditText editText = (EditText) findViewById(R.id.editTextTeamNumber);
+        final EditText editText1 = (EditText) findViewById(R.id.matchNumberEditText);
+
+        editText.requestFocus();
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -72,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
         final EditText editText1 = (EditText) findViewById(R.id.matchNumberEditText);
 
 
-        if  (editText.getText().toString().isEmpty()){
+        if  (editText.getText().toString().isEmpty() || editText1.getText().toString().isEmpty()){
             Context context = getApplicationContext();
-            CharSequence errorMassage = "you have goofed. Please enter a team number";
+            CharSequence errorMassage = "you have goofed. Please complete both fields";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, errorMassage, duration);
