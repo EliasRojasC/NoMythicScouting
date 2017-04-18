@@ -1,12 +1,15 @@
 package com.example.elias.nomythicscouting;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,8 +20,12 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.R.attr.value;
+import static java.util.logging.Logger.global;
 
 public class FormActivity extends AppCompatActivity {
     public int teamNum;
@@ -41,15 +48,16 @@ public class FormActivity extends AppCompatActivity {
     TimerTask task;
 
     // references to views
-    public TextView autoFuelPoints;
-    public TextView teleopFuelPoints;
+    public TextView autoHighShot;
+    public TextView autolowShot;
+    public TextView teleopHighShot;
+    public TextView teleopLowShot;
     public TextView teleopGears;
     public TextView timerCount;
     public CheckBox gearInAuto;
     public CheckBox didItClimb;
     public TextView loadingUpdate;
     public SeekBar slidervalue;
-    public CheckBox gearPickerUper;
 
     // references to buttons
     public Button autoHighShotMinus;
@@ -63,23 +71,25 @@ public class FormActivity extends AppCompatActivity {
 
         // Get all referenves to views
         juice = (EditText) findViewById(R.id.comments);
-        autoFuelPoints = (TextView) findViewById(R.id.editText2HighGoal);
-        teleopFuelPoints = (TextView) findViewById(R.id.lowCount);
+        autoHighShot = (TextView) findViewById(R.id.editText2HighGoal);
+        autolowShot = (TextView) findViewById(R.id.editTextLowGoal);
+        teleopHighShot = (TextView) findViewById(R.id.highCount);
+        teleopLowShot = (TextView) findViewById(R.id.lowCount);
         teleopGears = (TextView) findViewById(R.id.gearCount);
         timerCount = (TextView) findViewById(R.id.textView5Timer);
         gearInAuto = (CheckBox) findViewById(R.id.checkBox);
         didItClimb = (CheckBox) findViewById(R.id.checkBox2);
         loadingUpdate = (TextView) findViewById(R.id.textViewUpdates);
         slidervalue = (SeekBar) findViewById(R.id.seekBar);
-        gearPickerUper = (CheckBox) findViewById(R.id.gearPickerUper);
-
 
         // Get all referenves to buttons
         autoHighShotMinus = (Button) findViewById(R.id.button2);
         autoHighShotPlus = (Button) findViewById(R.id.button);
 
-        autoFuelPoints.setText("0");
-        teleopFuelPoints.setText("0");
+        autoHighShot.setText("0");
+        autolowShot.setText("0");
+        teleopHighShot.setText("0");
+        teleopLowShot.setText("0");
         teleopGears.setText("0");
         timerCount.setText("0");
 
@@ -110,15 +120,13 @@ public class FormActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     public void setAutoHighShot(View view) {
         // if plus, 1, if minus, -1
         int value;
 
-        int highShotValue = Integer.parseInt(autoFuelPoints.getText().toString());
+        int highShotValue = Integer.parseInt(autoHighShot.getText().toString());
         int id = view.getId();
 
         if (id == findViewById(R.id.button).getId()) value = 1;
@@ -126,23 +134,68 @@ public class FormActivity extends AppCompatActivity {
 
         if (highShotValue == 0) {
             if (value == 1) {
-                autoFuelPoints.setText("" + (highShotValue + 1));
+                autoHighShot.setText("" + (highShotValue + 1));
             }
         } else {
             if (value == 1) {
-                autoFuelPoints.setText("" + (highShotValue + 1));
+                autoHighShot.setText("" + (highShotValue + 1));
             } else {
-                autoFuelPoints.setText("" + (highShotValue - 1));
+                autoHighShot.setText("" + (highShotValue - 1));
             }
 
         }
     }
 
+    public void setAutolowShot(View view){
+        int value2;
 
-    public void setTeleopFuelPoints(View view){
+        int lowShotValue = Integer.parseInt(autolowShot.getText().toString());
+        int id = view.getId();
+
+        if (id == findViewById(R.id.button4).getId()) value2 = 1;
+        else value2 = -1;
+
+        if (lowShotValue == 0){
+            if(value2 == 1){
+                autolowShot.setText(""+(lowShotValue + 1));
+            }
+
+        } else {
+            if (value2 == 1){
+                autolowShot.setText("" + (lowShotValue + 1));
+            } else {
+                autolowShot.setText("" + (lowShotValue - 1));
+            }
+
+        }
+    }
+
+    public void setTeleopHighShot(View view){
+        int value3;
+
+        int teleopHighShotValue = Integer.parseInt(teleopHighShot.getText().toString());
+        int id = view.getId();
+
+        if(id == findViewById(R.id.button7SubtractHigh).getId()) value3 = 1;
+        else value3 = -1;
+
+        if (teleopHighShotValue == 0){
+            if(value3 == 1){
+                teleopHighShot.setText(""+(teleopHighShotValue + 1));
+            }
+        } else {
+            if (value3 == 1){
+                teleopHighShot.setText("" + (teleopHighShotValue + 1));
+            } else {
+                teleopHighShot.setText("" + (teleopHighShotValue - 1));
+            }
+        }
+    }
+
+    public void setTeleopLowShot(View view){
         int value4;
 
-        int teleopLowShotValue = Integer.parseInt(teleopFuelPoints.getText().toString());
+        int teleopLowShotValue = Integer.parseInt(teleopLowShot.getText().toString());
         int id = view.getId();
 
         if(id == findViewById(R.id.button5SubtractLow).getId()) value4 = 1;
@@ -150,13 +203,13 @@ public class FormActivity extends AppCompatActivity {
 
         if (teleopLowShotValue == 0){
             if(value4 == 1){
-                teleopFuelPoints.setText(""+(teleopLowShotValue + 1));
+                teleopLowShot.setText(""+(teleopLowShotValue + 1));
             }
         } else {
             if (value4 == 1){
-                teleopFuelPoints.setText("" + (teleopLowShotValue + 1));
+                teleopLowShot.setText("" + (teleopLowShotValue + 1));
             } else {
-                teleopFuelPoints.setText("" + (teleopLowShotValue - 1));
+                teleopLowShot.setText("" + (teleopLowShotValue - 1));
             }
         }
     }
@@ -240,9 +293,13 @@ public class FormActivity extends AppCompatActivity {
 
 
             outputStream = new FileOutputStream(file);
-            outputStream.write(autoFuelPoints.getText().toString().getBytes());
+            outputStream.write(autoHighShot.getText().toString().getBytes());
             outputStream.write(",".getBytes());
-            outputStream.write(teleopFuelPoints.getText().toString().getBytes());
+            outputStream.write(autolowShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
+            outputStream.write(teleopHighShot.getText().toString().getBytes());
+            outputStream.write(",".getBytes());
+            outputStream.write(teleopLowShot.getText().toString().getBytes());
             outputStream.write(",".getBytes());
             outputStream.write(teleopGears.getText().toString().getBytes());
             outputStream.write(",".getBytes());
@@ -269,17 +326,13 @@ public class FormActivity extends AppCompatActivity {
              outputStream.write(("" + juice.getText().toString()).getBytes());
             outputStream.write(",".getBytes());
             outputStream.write(("" + sliderProgress).getBytes());
-            outputStream.write((",".getBytes()));
-            if (gearPickerUper.isChecked()){
-                outputStream.write(" true".getBytes());
-            } else {
-                outputStream.write(" false".getBytes());
-            }
 
             outputStream.close();
 
-            autoFuelPoints.setText(""+0);
-            teleopFuelPoints.setText(""+0);
+            autoHighShot.setText(""+0);
+            autolowShot.setText(""+0);
+            teleopHighShot.setText(""+0);
+            teleopLowShot.setText(""+0);
             teleopGears.setText(""+0);
             juice.setText("");
                 value5 = -1;
